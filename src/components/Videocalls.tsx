@@ -72,9 +72,11 @@ const Videocalls = () => {
 
     return (
         <div className="App">
-            <h1>Current user id is {peerId}</h1>
-            <input type="text" value={remotePeerIdValue} onChange={e => setRemotePeerIdValue(e.target.value)} />
-            <button onClick={() => call(remotePeerIdValue)}>Call</button>
+            <h1> {peerId} </h1>
+            <div className="column">
+                <input type="text" value={remotePeerIdValue} onChange={e => setRemotePeerIdValue(e.target.value)} />
+                <button onClick={() => call(remotePeerIdValue)}>Call</button>
+            </div>
             <div>
                 <video ref={currentUserVideoRef} />
             </div>
