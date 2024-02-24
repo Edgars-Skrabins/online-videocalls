@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Peer, { MediaConnection } from 'peerjs';
 
 const Videocalls = () => {
@@ -16,8 +16,10 @@ const Videocalls = () => {
         });
 
         peer.on('call', (call: MediaConnection) => {
-            const getUserMedia = navigator.getUserMedia
-                || navigator.webkitGetUserMedia
+            const getUserMedia =
+                //@ts-expect-error its never null
+                navigator.getUserMedia //@ts-expect-error its never null
+                || navigator.webkitGetUserMedia //@ts-expect-error its never null
                 || navigator.mozGetUserMedia;
 
             getUserMedia?.({ video: true, audio: true }, (mediaStream: MediaStream) => {
