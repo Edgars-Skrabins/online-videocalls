@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import Peer, { MediaConnection } from 'peerjs';
+import {useEffect, useRef, useState} from 'react';
+import Peer, {MediaConnection} from 'peerjs';
 
 const Videocalls = () => {
     const [peerId, setPeerId] = useState<string>('');
@@ -22,13 +22,13 @@ const Videocalls = () => {
                 || navigator.webkitGetUserMedia //@ts-expect-error its never null
                 || navigator.mozGetUserMedia;
 
-            getUserMedia?.({ video: true, audio: true }, (mediaStream: MediaStream) => {
+            getUserMedia?.({video: true, audio: true}, (mediaStream: MediaStream) => {
                 if (currentUserVideoRef.current) {
                     currentUserVideoRef.current.srcObject = mediaStream;
                     currentUserVideoRef.current.play();
                 }
                 call.answer(mediaStream)
-                call.on('stream', function(remoteStream: MediaStream) {
+                call.on('stream', function (remoteStream: MediaStream) {
                     if (remoteVideoRef.current) {
                         remoteVideoRef.current.srcObject = remoteStream;
                         remoteVideoRef.current.play();
@@ -53,7 +53,7 @@ const Videocalls = () => {
             || navigator.webkitGetUserMedia //@ts-expect-error its never null
             || navigator.mozGetUserMedia;
 
-        getUserMedia?.({ video: true, audio: true }, (mediaStream: MediaStream) => {
+        getUserMedia?.({video: true, audio: true}, (mediaStream: MediaStream) => {
             if (currentUserVideoRef.current) {
                 currentUserVideoRef.current.srcObject = mediaStream;
                 currentUserVideoRef.current.play();
@@ -72,16 +72,18 @@ const Videocalls = () => {
 
     return (
         <div className="App">
-            <h1> {peerId} </h1>
-            <div className="column">
-                <input type="text" value={remotePeerIdValue} onChange={e => setRemotePeerIdValue(e.target.value)} />
-                <button onClick={() => call(remotePeerIdValue)}>Call</button>
-            </div>
-            <div>
-                <video ref={currentUserVideoRef} />
-            </div>
-            <div>
-                <video ref={remoteVideoRef} />
+            <div className="appContainer">
+                <h1> {peerId} </h1>
+                <div className="column">
+                    <input type="text" value={remotePeerIdValue} onChange={e => setRemotePeerIdValue(e.target.value)}/>
+                    <button onClick={() => call(remotePeerIdValue)}>Call</button>
+                </div>
+                <div>
+                    <video ref={currentUserVideoRef}/>
+                </div>
+                <div>
+                    <video ref={remoteVideoRef}/>
+                </div>
             </div>
         </div>
     );
